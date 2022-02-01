@@ -1,22 +1,20 @@
 const {readFile, writeFile} = require('fs').promises
 
-// doing our work of line 43
+// using require('fs').promises converted readFile and writeFile into promises
 
-// const util = require('util');
-// const readFilePromise = util.promisify(readFile);
-// const writeFilePromise = util.promisify(writeFile);
-
-    // IMPORTANT: using require('fs).promises does above work automatically
-
-const start = async () =>{
+const start = async () =>{  // use try catch block while using async
     try {
-        const first = await readFile('./content/first.txt', 'utf8');
-        const second = await readFile('./content/second.txt', 'utf8');
+        //waiting for readFile promise to resolve
+        const first = await readFile('./content/first.txt', 'utf8'); 
+        // waiting for next readFile promise to resolve
+        const second = await readFile('./content/second.txt', 'utf8'); 
+
+        // we have read file1 and file2 and stored them in vars
+
+        // using writeFile promise to write file 1 and 2 into result file
         await writeFile('./content/result-mind-granade.txt', `This is awesome : ${first},
         ${second}`);
 
-        console.log(first);
-        console.log(second);
     } catch (error) {
         console.log(error);
     }
@@ -35,6 +33,17 @@ start();
 //     }
 //     console.log(data);
 // })
+
+// ---------------------------------------------------------------------------
+
+// CONVERTING ABOVE FUNC INTO A PROMISE using "util"
+
+// const util = require('util');
+// const readFilePromise = util.promisify(readFile);
+// const writeFilePromise = util.promisify(writeFile);
+
+    // IMPORTANT: using require('fs).promises does above work automatically
+
 
 // ---------------------------------------------------------------------------
 
